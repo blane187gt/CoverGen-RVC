@@ -24,3 +24,23 @@ Navigate to the Download model tab, and paste the download link to the RVC model
 ### you can also upload `pth` and `index` file
 
 ![1002186696](https://github.com/user-attachments/assets/b8c2e7fd-bd31-4f46-8a8b-d8b29b15aa02)
+
+
+# Terms of Use
+The use of the converted voice for the following purposes is prohibited.
+
+Criticizing or attacking individuals.
+
+Advocating for or opposing specific political positions, religions, or ideologies.
+
+Publicly displaying strongly stimulating expressions without proper zoning.
+
+Selling of voice models and generated voice clips.
+
+Impersonation of the original owner of the voice with malicious intentions to harm/hurt others.
+
+Fraudulent purposes that lead to identity theft or fraudulent phone calls.
+
+# Disclaimer
+I am not liable for any direct, indirect, consequential, incidental, or special damages arising out of or in any way connected with the use/misuse or inability to use this software.
+
