@@ -44,3 +44,5 @@ Fraudulent purposes that lead to identity theft or fraudulent phone calls.
 # Disclaimer
 I am not liable for any direct, indirect, consequential, incidental, or special damages arising out of or in any way connected with the use/misuse or inability to use this software.
 
+
+vist [original project here!](https://huggingface.co/spaces/Politrees/CoverGen-RVC)
