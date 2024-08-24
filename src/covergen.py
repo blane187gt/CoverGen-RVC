@@ -23,7 +23,7 @@ warning = sys.argv[1]
 if __name__ == '__main__':
     voice_models = ignore_files(rvc_models_dir)
 
-    with gr.Blocks(title='CoverGen Lite - Politrees', theme=gr.themes.Soft(primary_hue="green", secondary_hue="green", neutral_hue="neutral", spacing_size="sm", radius_size="lg")) as app:
+    with gr.Blocks(title='CoverGen Lite - Politrees', theme="Hev832/Applio") as app:
         
         
         with gr.Tab("Welcome/Contacts"):
@@ -65,12 +65,11 @@ if __name__ == '__main__':
                 show_upload_button.click(swap_buttons, outputs=[show_upload_button, show_enter_button])
                 show_enter_button.click(swap_buttons, outputs=[show_enter_button, show_upload_button])
 
-            with gr.Group():
-                with gr.Row(variant='panel'):
-                    generate_btn = gr.Button("Generate", variant='primary', scale=1)
-                    converted_voice = gr.Audio(label='Converted Voice', scale=5, show_share_button=False)
-                    output_format = gr.Dropdown(['mp3', 'flac', 'wav'], value='mp3', label='File Format', scale=0.1, allow_custom_value=False, filterable=False)
-
+    
+            output_format = gr.Dropdown(['mp3', 'flac', 'wav'], value='mp3', label='File Format', scale=0.1, allow_custom_value=False, filterable=False)
+            generate_btn = gr.Button("Generate", variant='primary', scale=1)
+            converted_voice = gr.Audio(label='Converted Voice', scale=5, show_share_button=False)
+                    
             with gr.Accordion('Voice Conversion Settings', open=False):
                 with gr.Group():
                     with gr.Column(variant='panel'):
