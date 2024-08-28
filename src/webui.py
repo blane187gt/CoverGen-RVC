@@ -67,7 +67,7 @@ if __name__ == '__main__':
             generate_btn = gr.Button("Generate")
             converted_voice = gr.Audio(label='Converted Voice')
 
-            roformer_button.click(roformer_separator, [roformer_audio], [uvr_audio1, local_file])
+            roformer_button.click(roformer_separator, [uvr_audio], [uvr_audio1, local_file])
             roformer_download_button.click(download_audio, [roformer_link], [uvr_audio])
             ref_btn.click(update_models_list, None, outputs=rvc_model)
             generate_btn.click(song_cover_pipeline,
