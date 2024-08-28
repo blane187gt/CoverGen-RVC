@@ -9,8 +9,8 @@ ffmpeg-python>=0.2.0
 praat-parselmouth>=0.4.2
 pyworld==0.3.4
 torchcrepe==0.0.20
-numpy
-audio-separator[gpu]
+numpy==1.25.2
+audio-separator[gpu]==0.17.5
 scipy
 yt_dlp
 gdown
