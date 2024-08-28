@@ -106,4 +106,4 @@ if __name__ == '__main__':
                 separate_upload_output_message = gr.Text(label='Output Message', interactive=False)
                 separate_upload_button.click(upload_separate_files, inputs=[pth_file, index_file, separate_model_name], outputs=separate_upload_output_message)
 
-    app.launch(share=True, show_api=False).queue(api_open=False)
+    app.launch(share=True)
