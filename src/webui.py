@@ -44,11 +44,7 @@ if __name__ == '__main__':
                 )
                 uvr_audio1 = gr.Audio(label="audio output") 
 
-            roformer_button = gr.Button("Separate!", variant = "primary")
-            output_format = gr.Dropdown(['mp3', 'flac', 'wav'], value='mp3', label='File Format', allow_custom_value=False, filterable=False)
-            generate_btn = gr.Button("Generate", variant='primary', scale=1)
-            converted_voice = gr.Audio(label='Converted Voice', scale=5, show_share_button=False)
-                    
+            
             with gr.Accordion('Voice Conversion Settings', open=False):
                 with gr.Group():
                     with gr.Column():
@@ -65,6 +61,11 @@ if __name__ == '__main__':
                         filter_radius = gr.Slider(0, 7, value=3, step=1, label='Filter Radius', info='Manages the radius of filtering the pitch analysis results. If the filtering value is three or higher, median filtering is applied to reduce breathing noise in the audio recording.')
                         rms_mix_rate = gr.Slider(0, 1, value=0.25, step=0.01, label='RMS Mix Rate', info='Controls the extent to which the output signal is mixed with its envelope. A value close to 1 increases the use of the envelope of the output signal, which may improve sound quality.')
                         protect = gr.Slider(0, 0.5, value=0.33, step=0.01, label='Consonant Protection', info='Controls the extent to which individual consonants and breathing sounds are protected from electroacoustic breaks and other artifacts. A maximum value of 0.5 provides the most protection, but may increase the indexing effect, which may negatively impact sound quality. Reducing the value may decrease the extent of protection, but reduce the indexing effect.')
+
+            roformer_button = gr.Button("Separate!")
+            output_format = gr.Dropdown(['mp3', 'flac', 'wav'], value='mp3', label='File Format', allow_custom_value=False, filterable=False)
+            generate_btn = gr.Button("Generate")
+            converted_voice = gr.Audio(label='Converted Voice')
 
             roformer_button.click(roformer_separator, [roformer_audio], [uvr_audio1, local_file])
             roformer_download_button.click(download_audio, [roformer_link], [uvr_audio])
