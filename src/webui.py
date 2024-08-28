@@ -4,7 +4,7 @@ import urllib.request
 import zipfile
 import gdown
 import gradio as gr
-from main import song_cover_pipeline
+from main import song_cover_pipeline, download_audio, roformer_separator
 from audio_effects import add_audio_effects
 from modules.model_management import ignore_files, update_models_list, extract_zip, download_from_url, upload_zip_model, upload_separate_files
 from modules.ui_updates import show_hop_slider, update_f0_method, update_button_text, update_button_text_voc, update_button_text_inst, swap_visibility, swap_buttons
@@ -32,10 +32,19 @@ if __name__ == '__main__':
                     with gr.Group():
                         pitch = gr.Slider(-24, 24, value=0, step=0.5, label='Pitch Adjustment', info='-24 - male voice || 24 - female voice')
                 with gr.Column(scale=2, variant='panel'):
-                    local_file = gr.Textbox(label='url File')
-                    gr.Markdown("You can paste the link to the video/audio from many sites, check the complete list [here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)")
-                            
-                          
+                    local_file = gr.Audio(label='ur File')
+                    
+            with gr.Accordion ("UVR inputs"):
+                uvr_audio  = gr.Audio(label="audio Inputs UVr5", type="filepath")
+                gr.Markdown("You can paste the link to the video/audio from many sites, check the complete list [here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)")
+                uvr_link = gr.Textbox(label="URL Media")
+                roformer_download_button = gr.Button(
+                    "Download media",
+                    variant = "primary"
+                )
+                uvr_audio1 = gr.Audio(label="audio output") 
+
+            roformer_button = gr.Button("Separate!", variant = "primary")
             output_format = gr.Dropdown(['mp3', 'flac', 'wav'], value='mp3', label='File Format', allow_custom_value=False, filterable=False)
             generate_btn = gr.Button("Generate", variant='primary', scale=1)
             converted_voice = gr.Audio(label='Converted Voice', scale=5, show_share_button=False)
@@ -57,6 +66,8 @@ if __name__ == '__main__':
                         rms_mix_rate = gr.Slider(0, 1, value=0.25, step=0.01, label='RMS Mix Rate', info='Controls the extent to which the output signal is mixed with its envelope. A value close to 1 increases the use of the envelope of the output signal, which may improve sound quality.')
                         protect = gr.Slider(0, 0.5, value=0.33, step=0.01, label='Consonant Protection', info='Controls the extent to which individual consonants and breathing sounds are protected from electroacoustic breaks and other artifacts. A maximum value of 0.5 provides the most protection, but may increase the indexing effect, which may negatively impact sound quality. Reducing the value may decrease the extent of protection, but reduce the indexing effect.')
 
+            roformer_button.click(roformer_separator, [roformer_audio], [uvr_audio1, local_file])
+            roformer_download_button.click(download_audio, [roformer_link], [uvr_audio])
             ref_btn.click(update_models_list, None, outputs=rvc_model)
             generate_btn.click(song_cover_pipeline,
                               inputs=[local_file, rvc_model, pitch, index_rate, filter_radius, rms_mix_rate, f0_method, crepe_hop_length, protect, output_format],
@@ -76,7 +87,7 @@ if __name__ == '__main__':
                 gr.HTML("<h3>Supported sites: <a href='https://huggingface.co/' target='_blank'>HuggingFace</a>, <a href='https://pixeldrain.com/' target='_blank'>Pixeldrain</a>, <a href='https://drive.google.com/' target='_blank'>Google Drive</a>, <a href='https://mega.nz/' target='_blank'>Mega</a>, <a href='https://disk.yandex.ru/' target='_blank'>Yandex Disk</a></h3>")
                 
                 dl_output_message = gr.Text(label='Output Message', interactive=False)
-                download_btn.click(download_from_url, inputs=[model_zip_link, model_name], outputs=dl_output_message)
+                download_btn.click(download_from_url, inputs=[uvr_link, model_name], outputs=dl_output_message)
 
             with gr.Tab('Upload a ZIP archive'):
                 with gr.Row(equal_height=False):
