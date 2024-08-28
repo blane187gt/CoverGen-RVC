@@ -32,7 +32,7 @@ if __name__ == '__main__':
                     with gr.Group():
                         pitch = gr.Slider(-24, 24, value=0, step=0.5, label='Pitch Adjustment', info='-24 - male voice || 24 - female voice')
                 with gr.Column(scale=2, variant='panel'):
-                    local_file = gr.Textbox(label='url File', interactive=False)
+                    local_file = gr.Textbox(label='url File')
                     gr.Markdown("You can paste the link to the video/audio from many sites, check the complete list [here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)")
                             
                           
