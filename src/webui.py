@@ -34,14 +34,10 @@ if __name__ == '__main__':
                 with gr.Column(scale=2, variant='panel'):
                     local_file = gr.Audio(label='ur File')
                     
-            with gr.Accordion ("UVR inputs"):
+            with gr.Accordion("UVR inputs"):
                 uvr_audio  = gr.Audio(label="audio Inputs UVr5", type="filepath")
                 gr.Markdown("You can paste the link to the video/audio from many sites, check the complete list [here](https://github.com/yt-dlp/yt-dlp/blob/master/supportedsites.md)")
                 uvr_link = gr.Textbox(label="URL Media")
-                roformer_download_button = gr.Button(
-                    "Download media",
-                    variant = "primary"
-                )
                 uvr_audio1 = gr.Audio(label="audio output") 
 
             
@@ -62,6 +58,10 @@ if __name__ == '__main__':
                         rms_mix_rate = gr.Slider(0, 1, value=0.25, step=0.01, label='RMS Mix Rate', info='Controls the extent to which the output signal is mixed with its envelope. A value close to 1 increases the use of the envelope of the output signal, which may improve sound quality.')
                         protect = gr.Slider(0, 0.5, value=0.33, step=0.01, label='Consonant Protection', info='Controls the extent to which individual consonants and breathing sounds are protected from electroacoustic breaks and other artifacts. A maximum value of 0.5 provides the most protection, but may increase the indexing effect, which may negatively impact sound quality. Reducing the value may decrease the extent of protection, but reduce the indexing effect.')
 
+            roformer_download_button = gr.Button(
+                    "Download media",
+                    variant = "primary"
+            )
             roformer_button = gr.Button("Separate!")
             output_format = gr.Dropdown(['mp3', 'flac', 'wav'], value='mp3', label='File Format', allow_custom_value=False, filterable=False)
             generate_btn = gr.Button("Generate")
