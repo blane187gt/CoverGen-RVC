@@ -118,23 +118,23 @@ def roformer_separator(roformer_audio):
 
     return stem1_file, stem2_file
 
-def song_cover_pipeline(stem2_file, voice_model, pitch_change, index_rate=0.5, filter_radius=3, rms_mix_rate=0.25, f0_method='rmvpe',
+def song_cover_pipeline(audio_file, voice_model, pitch_change, index_rate=0.5, filter_radius=3, rms_mix_rate=0.25, f0_method='rmvpe',
                         crepe_hop_length=128, protect=0.33, output_format='mp3', progress=None, f0_min=50, f0_max=1100):
     
-    if not stem2_file or not voice_model:
+    if not audio_file or not voice_model:
         raise ValueError('Make sure that the song input field and voice model field are filled in.')
 
     if progress:
         progress(0, '[~] Starting the AI cover generation pipeline...')
 
     if not os.path.exists(stem2_file):
-        raise FileNotFoundError(f'{stem2_file} does not exist.')
+        raise FileNotFoundError(f'{audio_file} does not exist.')
 
-    song_id = get_hash(stem2_file)
+    song_id = get_hash(audio_file)
     song_dir = os.path.join(OUTPUT_DIR, song_id)
     os.makedirs(song_dir, exist_ok=True)
 
-    orig_song_path = convert_to_stereo(stem2_file)
+    orig_song_path = convert_to_stereo(audio_file)
     ai_cover_path = os.path.join(song_dir, f'Converted_Voice.{output_format}')
 
     if os.path.exists(ai_cover_path):
