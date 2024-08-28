@@ -1,4 +1,4 @@
-gradio==3.48.0
+gradio
 tensorboardX
 einops
 local-attention
